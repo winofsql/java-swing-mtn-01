@@ -2,7 +2,6 @@ package action;
 
 import java.sql.*;
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 
 public class AppWindow extends BaseWindow {
@@ -31,7 +30,7 @@ public class AppWindow extends BaseWindow {
     private JTextField jSeibetu = null;
 
     private JComboBox<String> genderComboBox;
-    private Object[] genders = {0, 1};
+    // private int[] genders = {0, 1};
     private String[] genderLabels = {"男性", "女性"};
 
     public int mainWidth = 600;
@@ -44,8 +43,8 @@ public class AppWindow extends BaseWindow {
     private JButton getJButton() {
         if (jButton == null) {
             jButton = new JButton();
-            // メインウインドウに対して、100x30 のボタンを追加
-            jButton.setBounds( 250, 30-7, 100, 30 );
+            // メインウインドウに対して、100x22 のボタンを追加
+            jButton.setBounds( 250, 30-3, 100, 22 );
             jButton.setText("実行");
             jButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -78,7 +77,6 @@ public class AppWindow extends BaseWindow {
                         jSeibetu.setText(seibetu+"");
                         genderComboBox.setSelectedIndex(seibetu);
 
-
                         // 文字列
                         String seibetu2 = String.format("%d", seibetu);
                         if ( seibetu2.equals("0") ) {
@@ -87,22 +85,6 @@ public class AppWindow extends BaseWindow {
                         else {
                             System.out.println("女性");
                         }
-
-                        // while( rs.next() ) {
-
-                        //     System.out.println(rs.getString("社員コード"));
-                        //     System.out.println(rs.getString("氏名"));
-                        //     System.out.println(rs.getString("フリガナ"));
-                        //     System.out.println(rs.getString("所属"));
-                        //     System.out.println(rs.getString("性別"));
-                        //     System.out.println(rs.getString("作成日"));
-                        //     System.out.println(rs.getString("更新日"));
-                        //     System.out.println(rs.getString("給与"));
-                        //     System.out.println(rs.getString("手当"));
-                        //     System.out.println(rs.getString("管理者"));
-                        //     System.out.println(rs.getString("生年月日"));
-
-                        // }
 
                         rs.close();
                         stmt.close();
@@ -142,7 +124,7 @@ public class AppWindow extends BaseWindow {
         this.setSize(mainWidth, mainHeight);
 
         // ウインドウ位置の変更
-        centerWindow(-200);
+        centerWindow();
 
         // パネルを適用
         this.setContentPane(getJContentPane());
@@ -159,6 +141,7 @@ public class AppWindow extends BaseWindow {
     // 画面( パネル作成 )
     // *****************************************************
     private JPanel getJContentPane() {
+
         if (jContentPane == null) {
             jContentPane = new JPanel();
             jContentPane.setLayout(null);
@@ -199,12 +182,11 @@ public class AppWindow extends BaseWindow {
             jSeibetu.setVisible(false);
 
             genderComboBox = new JComboBox<>(genderLabels);
-            genderComboBox.setBounds(150, 30+50+30+30+30, 150, 19);
+            genderComboBox.setBounds(150, 30+50+30+30, 150, 19);
             jContentPane.add(genderComboBox);
 
 
             // 初期状態の画面制御
-            // jSname.setEnabled(false);
             jSname.setEditable(false);
             jFuri.setEditable(false);
             genderComboBox.setEnabled(false);
